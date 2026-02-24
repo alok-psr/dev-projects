@@ -11,4 +11,11 @@
 ## future goals
 - use db to store the tasks and user data for auth
 - if possible learn about jwt auth and implement it
-- learn to use components from shadcn and improve the ui 
+- learn to use components from shadcn and improve the ui
+
+### How to run 
+step 1 :: clone the repo
+
+step 2 :: in the terminal `npm i`
+
+step 3 :: run `npm run dev` 
