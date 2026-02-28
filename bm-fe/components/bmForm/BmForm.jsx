@@ -1,26 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { writeNew } from "../../data/urlData";
 
-// current err :: when refresh uni index becomes 0 hence starts to overite bms from starting .. next .. the new bm list after adding dosed change unless refreshed resetting the uniindex to 0
-// the new list not refresing cuz the add button is in form but list is inside bmlist .. and the list updates when data is changed in the bmList .. so figure out how to trigger change in bmlist from add button here
 
-function BmForm() {
+
+function BmForm({setBmData}) {
     const [uniKey,setUniKey] = useState(0); // to maintain a universal key for every new bm
     const [bmURL, setBmURL] = useState(''); // entered url
+
     const handleSubmit = (e)=>{
       e.preventDefault();
+      
       console.log("clicked ;;;; ", e)
       console.log(bmURL);
+      setBmData(prev=>[...prev,{uniKey,bmURL}])
       try {
         writeNew(uniKey,bmURL)
         setUniKey(prev=>prev+1);
+        localStorage.setItem('uniKey',uniKey);
         console.log("entered successfully --", uniKey)
+
       } catch (error) {
         console.log('err occoured :: ',error)
       }
 
     }
-
+    useEffect(()=>{
+      const uk = localStorage.getItem('uniKey')? Number(localStorage.getItem('uniKey')) : 0; 
+      setUniKey(uk+1) // at uk last url was added so we need to add after it 
+    },[])
 
 
     return (
