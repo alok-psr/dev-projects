@@ -7,6 +7,7 @@
 - read the url and save it in local file [ or DB after basic working is done ]
 - read from the db then render it on the home page in a list format
 - add feature to edit and delete from the saved urls
+- pin feature of imp bookmarks
 
 ## future goals
 - use db to store the tasks and user data for auth

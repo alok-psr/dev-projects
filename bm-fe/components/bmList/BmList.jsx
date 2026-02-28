@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import {  remove } from "../../data/urlData";
 import BmListElement from "./BmListElement";
-
 
 function BmList({bmData,setBmData}){
 
@@ -12,7 +10,6 @@ function BmList({bmData,setBmData}){
         remove(ind)
     }
 
-    
     return (
         <>
             <div className="bg-slate-400 mx-10 rounded-md p-4 mt-5 flex flex-col">

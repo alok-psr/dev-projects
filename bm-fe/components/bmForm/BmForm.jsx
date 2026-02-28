@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { writeNew } from "../../data/urlData";
 
-
-
 function BmForm({setBmData}) {
     const [uniKey,setUniKey] = useState(0); // to maintain a universal key for every new bm
     const [bmURL, setBmURL] = useState(''); // entered url
 
     const handleSubmit = (e)=>{
       e.preventDefault();
-      
+      if(bmURL.trim()==''){
+        alert('field empty !')
+        return
+      };
       console.log("clicked ;;;; ", e)
       console.log(bmURL);
       setBmData(prev=>[...prev,{uniKey,bmURL}])

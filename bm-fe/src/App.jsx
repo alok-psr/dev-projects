@@ -10,7 +10,7 @@ function App() {
     const data = read();
     setBmData(Object.values(data)); // convert obj of obj to array of obj[values:: {key,value}]
     console.log("data from bmlist --- ",Object.values(data))
-    // console.log(Obje.key,)
+
   },[localStorage.getItem('bookmarks')])
   return (
     <div className='bg-slate-900 min-w-[400px] h-screen'>

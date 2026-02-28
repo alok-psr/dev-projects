@@ -1,6 +1,5 @@
 const STORAGE_KEY = 'bookmarks'
 
-
 function read(){
     const saved = localStorage.getItem('bookmarks');
     const data = saved ? JSON.parse(saved) : {}; // data is stored in obj of obj :: {key:{key,value}...}

@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react"
-import { remove } from "../../data/urlData";
 
 
 function BmListElement({data,ikey,onDel}) {
   
-
-  // const [isEdit,setIsEdit] = useState(false)
-
   function handleDelete(e){
-
     
     e.preventDefault();
     console.log('i key -- ',ikey)
