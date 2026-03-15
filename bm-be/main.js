@@ -1,16 +1,23 @@
 import { configDotenv } from "dotenv";
 import express from "express";
+import cors from 'cors';
 import {connectDB} from "./src/db/db.js"
 import BMroute from "./src/routes/bm.js"
 
 configDotenv();
-console.log("mongo uri ::",process.env.MONGO_URI)
+console.log("mongo uri ::",`${process.env.MONGO_URI}/${process.env.DB_NAME}`)
 
 
 const app = express()
 const PORT = process.env.PORT;
 
+app.use(cors({
+    origin:'http://localhost:5174',
+    allowedHeaders:['Content-Type'],
+    methods:['POST','GET','DELETE']
+}))
 app.use(express.json())
+
 
 app.use('/api/BM',BMroute);
 app.get('/health', (req, res) => {
