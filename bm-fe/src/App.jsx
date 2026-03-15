@@ -2,8 +2,6 @@ import { useState,useEffect } from 'react'
 import BmForm from '../components/bmForm/BmForm.jsx'
 import BmList from '../components/bmList/BmList.jsx'
 
-
-
 function App() {
   const [bmData,setBmData] = useState([])
   async function fetchData() {
@@ -22,9 +20,7 @@ function App() {
   useEffect( ()=>{
     console.log('useEffect')
     fetchData();
-     
-    // console.log(data)
-    // setBmData(data); 
+
     console.log("data from bmlist --- ",bmData)
 
   },[localStorage.getItem('bookmarks')])
