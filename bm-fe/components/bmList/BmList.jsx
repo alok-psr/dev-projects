@@ -1,13 +1,21 @@
 import {  remove } from "../../data/urlData";
 import BmListElement from "./BmListElement";
 
-function BmList({bmData,setBmData}){
+function BmList({bmData,setBmData,fetchData}){
 
-    function onDelEle(ind){
-        setBmData(prev=>(
-            prev.filter((val,i)=>i!==ind)
-        ))
-        remove(ind)
+    async function onDelEle(id){
+        try {
+            const resp =await fetch(`http://localhost:8080/api/BM/${id}`,{
+                method:'DELETE'
+            })
+            const data =await resp.json();
+            console.log("delete success -----------\n",data)
+            await fetchData()
+            console.log(bmData)
+        } catch (err) {
+            console.log("deletion failed :: ", err)    
+        }
+        
     }
 
     return (
@@ -16,7 +24,7 @@ function BmList({bmData,setBmData}){
                 <h1 className="text-2xl  text-sky-100 text-center">Your BookMarks</h1>
                 <ul >
                     {bmData.map((e, i) => (
-                        <li className="my-2 " key={e.key}><BmListElement data={e.value} ikey={e.key} onDel={onDelEle}/></li>
+                        <li className="my-2 " key={e._id}><BmListElement data={e.url} ikey={e._id} onDel={onDelEle}/></li>
                     ))}
                 </ul>
             </div>

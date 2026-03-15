@@ -5,7 +5,7 @@ function BmForm({setBmData}) {
     const [uniKey,setUniKey] = useState(0); // to maintain a universal key for every new bm
     const [bmURL, setBmURL] = useState(''); // entered url
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
       e.preventDefault();
       if(bmURL.trim()==''){
         alert('field empty !')
@@ -13,16 +13,31 @@ function BmForm({setBmData}) {
       };
       console.log("clicked ;;;; ", e)
       console.log(bmURL);
-      setBmData(prev=>[...prev,{uniKey,bmURL}])
-      try {
-        writeNew(uniKey,bmURL)
-        setUniKey(prev=>prev+1);
-        localStorage.setItem('uniKey',uniKey);
-        console.log("entered successfully --", uniKey)
+      const resp = await fetch(
+        "http://localhost:8080/api/BM",
+        {
+          method:'POST',
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify(
+            {
+              url:bmURL
+            })
+      })
+      .then((r)=>(r.json()))
+      .then((d)=>{
+        setBmData(prev=>[...prev,d])
+        // console.log();
+      })
+      // setBmData(prev=>[...prev,{uniKey,bmURL}])
+      // try {
+      //   writeNew(uniKey,bmURL)
+      //   setUniKey(prev=>prev+1);
+      //   localStorage.setItem('uniKey',uniKey);
+      //   console.log("entered successfully --", uniKey)
 
-      } catch (error) {
-        console.log('err occoured :: ',error)
-      }
+      // } catch (error) {
+      //   console.log('err occoured :: ',error)
+      // }
 
     }
     useEffect(()=>{
